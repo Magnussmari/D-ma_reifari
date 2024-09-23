@@ -1,4 +1,4 @@
-# Dómagreining
+# Dómagreining  alpha útgáfa 1.0
 
 **Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is)
 
@@ -64,7 +64,7 @@ Dómagreining er opinn hugbúnaður sem gerir notendum kleift að hlaða upp PDF
 
 ## Framlag
 
-Framlag er velkomið! Vinsamlegast opnið málefni (issue) áður en þið sendið pull request.
+Framlög er velkomið! Vinsamlegast opnið málefni (issue) áður en þið sendið pull request.
 
 ## Leyfi
 
