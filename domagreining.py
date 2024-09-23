@@ -56,6 +56,7 @@ with col2:
     st.markdown("**Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is)")
     st.write("Hlaðið upp PDF eða TXT skjali af íslenskum dómi og greinið með GPT-4o")
     st.markdown("**Öll notkun á síðunni er undir MIT leyfi. Sjá nánari upplýsingar neðst á síðunni. Engum gögnum er safnað.**")
+st.markdown("Verkefnishlekkur: [https://github.com/Magnussmari/Domagreining/](https://github.com/Magnussmari/Domagreining/)")
 
 # --- API Key Input ---
 api_key = st.text_input("Sláðu inn OpenAI API lykilinn þinn:", type="password")
