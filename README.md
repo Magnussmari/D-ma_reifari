@@ -14,6 +14,17 @@ Dómagreining er opinn hugbúnaður sem gerir notendum kleift að hlaða upp PDF
 - Skipulögð svörun með 8 lykilþáttum
 - Hægt er að hlaða niður greiningunni
 
+## Þróun
+
+-Fjölga mögulegum módelum
+   -Anthropic
+   -Google
+   -Ollama
+
+-Lengra samtal eftir greininguna
+
+
+
 ## Uppsetning
 
 1. Klónaðu þetta geymslu (repository):
