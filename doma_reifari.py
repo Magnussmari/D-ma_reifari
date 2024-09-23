@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 import pandas as pd
-from openai import openai
+import openai
 from dotenv import load_dotenv
 import os
 import PyPDF2
@@ -53,10 +53,11 @@ with col1:
 with col2:
     st.title("Dómagreining")
     st.markdown("**Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is)")
-    st.write("Hlaðið upp PDF eða TXT skjali af íslenskum dómi, dragið út lykilupplýsingar og greinið þær með GPT-4o")
+    st.write("Hlaðið upp PDF eða TXT skjali af íslenskum dómi og greinið þær með GPT-4o")
 
 # --- API Key Input ---
 api_key = st.text_input("Sláðu inn OpenAI API lykilinn þinn:", type="password")
+#api_key = os.getenv("OPENAI_API_KEY") þá getur þú keyrt þetta locally með því að setja OPENAI_API_KEY= í .env	
 
 # --- File Uploader ---
 uploaded_file = st.file_uploader("Veljið dómsskjal...", type=["pdf", "txt"])
@@ -77,7 +78,7 @@ def extract_text_from_pdf(pdf_file):
     return text
 
 def query_gpt_4(case_text, api_key):
-    client = OpenAI(api_key=api_key)
+    openai.api_key = api_key
     prompt = f"""
     Greindu eftirfarandi íslenskan dóm og dragðu út lykilupplýsingar:
 
@@ -97,13 +98,12 @@ def query_gpt_4(case_text, api_key):
     Fyrir hvern kafla, veittu hnitmiðaðar og viðeigandi upplýsingar dregnar út úr texta málsins.
     """
 
-    response = client.chat.completions.create(
+    response = openai.ChatCompletion.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}]
     )
 
-
-    return response.choices[0].text.strip()
+    return response.choices[0].message['content'].strip()
 
 if uploaded_file is not None and api_key:
     # Extract text from the uploaded file
@@ -139,7 +139,7 @@ st.markdown(
     """
     <hr>
     <p style='text-align: center;'>
-    Þetta verkefni er með MIT leyfi. Notkun er alfarið á eigin ábyrgð! Magnús Smári 2024. 
+    Notkun er alfarið á eigin ábyrgð! Magnús Smári 2024. 
     <a href="https://opensource.org/licenses/MIT" target="_blank">MIT leyfi</a>
     </p>
     """,

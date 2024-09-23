@@ -1,0 +1,46 @@
+### Titill: Dómstóll - Númer málsins
+Dómstóll: Evrópudómstóllinn – Stóra deild
+Númer málsins: C‑55/18
+
+### 1. Samantekt málsins
+Málið snýst um hvort Spánn, samkvæmt túlkun sinni á innlendum lögum, uppfylli þær kröfur sem koma fram í Evróputilskipunum varðandi vinnu- og hvíldartíma með því að krefjast ekki kerfis til að mæla daglegan vinnutíma hvers starfsmanns.
+
+### 2. Lykilstaðreyndir
+1. **Ákvörðun máls:** Ákvörðun tóku Audiencia Nacional (þjóðréttardómstóll Spánar).
+2. **Áfrýjun:** Federación de Servicios de Comisiones Obreras (CCOO) höfðar mál gegn Deutsche Bank SAE vegna skorts á kerfi til að skrá daglega vinnu starfsmanna.
+3. **Lagaumhverfi:** Spænsk lög krefjast ekki kerfis til að mæla daglegan vinnutíma nema varðandi yfirvinnutíma.
+4. **Vinnureglur Deutsche Bank:** Bankinn notar tölvuforrit sem skráir einungis heilar fjarvistardagar en ekki raunverulegan vinnutíma.
+
+### 3. Lagaleg rök
+Evrópudómstóllinn telur að án kerfis sem mælir daglegan vinnutíma starfsmanna sé ekki hægt að tryggja raunverulega verndina á réttindum sem kveðið er á um í Evrópulöggjöf. Þetta hindrar starfsmenn í að staðfesta brot á réttindum sínum, sem og að tryggja eftirlit með virðingu á vinnu- og hvíldartímamörkum.
+
+### 4. Tilvísanir í lög og reglugerðir
+1. Evróputilskipun 2003/88/EC (um skipulagningu vinnutíma)
+   - Greinar 3, 5, 6, 16, 22.
+2. Evróputilskipun 89/391/EEC (um öryggi og heilsu starfsmanna)
+   - Greinar 4(1), 11(3), 16(3).
+3. Stjórnarskrá Evrópusambandsins (Charter of Fundamental Rights of the European Union)
+   - Grein 31(2).
+   
+### 5. Tilvísanir í aðra dóma
+Máilokun tekur mið af fyrri dómsúrlausnum m.a.:
+- **Judgment of 5 October 2004:** Pfeiffer and Others, C‑397/01 to C‑403/01.
+- **Judgment of 6 November 2018:** Max-Planck-Gesellschaft zur Förderung der Wissenschaften, C‑684/16.
+- **Judgment of 26 June 2001:** BECTU, C‑173/99.
+- **Judgment of 7 September 2006:** Commission v United Kingdom, C‑484/04.
+- **Judgment of 14 October 2010:** Fuß, C‑243/09.
+
+### 6. Tilvísanir í aðrar réttarheimildir
+- Túlkun á Spænsku lögum um vinnuvernd og réttindi.
+- International Labour Organisation Conventions No 1 og No 30.
+
+### 7. Úrskurður dómstólsins
+Evrópudómstóllinn úrskurðar að Evróputilskipun 2003/88/EC og tilheyrandi greinar, ásamt Evrópusambandsstjórnarskránni 31(2), útiloki lög aðildarríkis sem krefjast ekki kerfis til að mæla daglegan vinnu starfsmanna.
+
+### 8. Áhrif á lögfræðilega rannsókn
+Niðurstaðan hefur mikil áhrif á löggjöf og regluverk vinnuréttar innan Evrópusambandsins:
+1. **Framkvæmd vinnulöggjafar:** Aðildarríki þurfa að setja upp kerfi til að mæla raunvinnutíma til að tryggja eftirfylgni með reglugerðum um vinnu- og hvíldartíma.
+2. **Vernd starfsmanna:** Staðfestir mikilvægi starfsmanna í veikari stöðu og veitir þeim tækifæri til að fara fram á að réttindi þeirra séu virt.
+3. **Ákvæði í landslögum:** Löggjöf aðildarríkja þyrfti jafnvel að breytast til að uppfylla þessar kröfur Evrópudómstólsins.
+
+Niðurstaðan styrkir almenna vernd starfsmanna innan ESB og leggur áherslu á skyldu aðildarríkja til að gera nauðsynlegar ráðstafanir til verndar réttindum starfsmanna.
