@@ -53,7 +53,8 @@ with col1:
 with col2:
     st.title("Dómagreining")
     st.markdown("**Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is)")
-    st.write("Hlaðið upp PDF eða TXT skjali af íslenskum dómi og greinið þær með GPT-4o")
+    st.write("Hlaðið upp PDF eða TXT skjali af íslenskum dómi og greinið með GPT-4o")
+    st.write("Öll notkun á síðunni er undir MIT leyfi. Sjá nánari upplýsingar neðst á síðunni. Engum gögnum er safnað.")
 
 # --- API Key Input ---
 api_key = st.text_input("Sláðu inn OpenAI API lykilinn þinn:", type="password")
@@ -68,7 +69,7 @@ def extract_text_from_file(file):
     elif file.type == "text/plain":
         return file.getvalue().decode("utf-8")
     else:
-        raise ValueError("Óstuddur skráarsnið")
+        raise ValueError("Óþekkt skráarsnið")
 
 def extract_text_from_pdf(pdf_file):
     pdf_reader = PyPDF2.PdfReader(pdf_file)
@@ -78,7 +79,7 @@ def extract_text_from_pdf(pdf_file):
     return text
 
 def query_gpt_4(case_text, api_key):
-    openai.api_key = api_key
+    client = openai.OpenAI(api_key=api_key)
     prompt = f"""
     Greindu eftirfarandi íslenskan dóm og dragðu út lykilupplýsingar:
 
@@ -98,12 +99,12 @@ def query_gpt_4(case_text, api_key):
     Fyrir hvern kafla, veittu hnitmiðaðar og viðeigandi upplýsingar dregnar út úr texta málsins.
     """
 
-    response = openai.ChatCompletion.create(
-        model="gpt-4o",
+    response = client.chat.completions.create(
+        model="gpt-4",
         messages=[{"role": "user", "content": prompt}]
     )
 
-    return response.choices[0].message['content'].strip()
+    return response.choices[0].message.content.strip()
 
 if uploaded_file is not None and api_key:
     # Extract text from the uploaded file
