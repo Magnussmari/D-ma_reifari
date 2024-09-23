@@ -89,7 +89,7 @@ Framlög er velkomið! Vinsamlegast opnið málefni (issue) áður en þið send
 
 Magnús Smári - [www.smarason.is](https://www.smarason.is)
 
-Verkefnishlekkur: [(https://github.com/Magnussmari/Domagreining/)]
+Verkefnishlekkur: https://github.com/Magnussmari/Domagreining/
 
 ---
 
