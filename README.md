@@ -69,7 +69,7 @@ Dómagreining er opinn hugbúnaður sem gerir notendum kleift að hlaða upp PDF
 ## API lykill og öryggisatriði
 
 - Þetta app notar OpenAI API og krefst þess að þú notir þinn eigin API lykil.
-- API lykillinn þinn er notaður beint í appinu og er ekki geymdur.
+- API lykillinn þinn er notaður beint í appinu og er ekki geymdur. Ef þú vilt nota .env þá er bíður kóðinn upp á það.
 - Þú berð ábyrgð á notkun API lykilsins þíns og öllum kostnaði sem fylgir notkun hans.
 - Vinsamlegast lestu og fylgdu [OpenAI's use policies](https://openai.com/policies/usage-policies).
 
