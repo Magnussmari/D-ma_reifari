@@ -51,10 +51,11 @@ with col1:
     # Placeholder for your logo (replace with actual image URL later)
     st.image("header.png", width=200) 
 with col2:
-    st.title("Dómagreining")
+    st.title("Dómagreining - Alpha útgáfa 1.0")
+    st.caption("Þróunarverkefni")
     st.markdown("**Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is)")
     st.write("Hlaðið upp PDF eða TXT skjali af íslenskum dómi og greinið með GPT-4o")
-    st.write("Öll notkun á síðunni er undir MIT leyfi. Sjá nánari upplýsingar neðst á síðunni. Engum gögnum er safnað.")
+    st.markdown("**Öll notkun á síðunni er undir MIT leyfi. Sjá nánari upplýsingar neðst á síðunni. Engum gögnum er safnað.**")
 
 # --- API Key Input ---
 api_key = st.text_input("Sláðu inn OpenAI API lykilinn þinn:", type="password")
@@ -100,7 +101,7 @@ def query_gpt_4(case_text, api_key):
     """
 
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4o",
         messages=[{"role": "user", "content": prompt}]
     )
 
