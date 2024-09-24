@@ -179,17 +179,17 @@ if uploaded_files is not None:
                     if follow_up:
                         with st.spinner("Svarar..."):
                             follow_up_response = query_gpt_with_memory(st.session_state.case_memory, follow_up, api_key)
+                        
+                        # Clear previous content and display new answer at the top
+                        st.empty()
                         st.markdown("**Svar:**")
                         st.markdown(follow_up_response)
-                        # Store the response in session state
-                        st.session_state.last_response = follow_up_response
+                        
+                        # Reinsert the input field and button below the new answer
+                        st.text_input("Settu inn spurningu þína hér:", key="follow_up_new")
+                        st.button("Svara", key="svara_new")
                     else:
                         st.warning("Vinsamlegast sláðu inn spurningu.")
-
-                # Display the last response if it exists
-                if 'last_response' in st.session_state:
-                    st.markdown("**Síðasta svar:**")
-                    st.markdown(st.session_state.last_response)
 
         except ValueError as e:
             st.error(f"Villa: {str(e)}")
