@@ -172,6 +172,9 @@ if uploaded_files is not None:
                 st.markdown("---")
                 st.subheader("Spurðu út í dóminn")
                 
+                # Create a placeholder for the answer
+                answer_placeholder = st.empty()
+                
                 # Create a text input for questions
                 follow_up = st.text_input("Settu inn spurningu þína hér:", key="follow_up")
 
@@ -180,14 +183,9 @@ if uploaded_files is not None:
                         with st.spinner("Svarar..."):
                             follow_up_response = query_gpt_with_memory(st.session_state.case_memory, follow_up, api_key)
                         
-                        # Clear previous content and display new answer at the top
-                        st.empty()
-                        st.markdown("**Svar:**")
-                        st.markdown(follow_up_response)
-                        
-                        # Reinsert the input field and button below the new answer
-                        st.text_input("Settu inn spurningu þína hér:", key="follow_up_new")
-                        st.button("Svara", key="svara_new")
+                        # Display new answer at the top using the placeholder
+                        answer_placeholder.markdown("**Svar:**")
+                        answer_placeholder.markdown(follow_up_response)
                     else:
                         st.warning("Vinsamlegast sláðu inn spurningu.")
 
