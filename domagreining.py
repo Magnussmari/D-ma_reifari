@@ -10,8 +10,8 @@ import io
 load_dotenv()
 
 # Initialize session state for memory
-if 'memory' not in st.session_state:
-    st.session_state.memory = ""
+if 'case_memory' not in st.session_state:
+    st.session_state.case_memory = ""
 
 # Initialize session state for conversation history
 if 'conversation_history' not in st.session_state:
@@ -120,16 +120,9 @@ def query_gpt_with_memory(case_text, follow_up, api_key):
     client = openai.OpenAI(api_key=api_key)
     
     messages = [
-        {"role": "system", "content": f"You are an AI assistant analyzing the following Icelandic court case:\n\n{case_text}"},
-        {"role": "assistant", "content": st.session_state.memory}
+        {"role": "system", "content": f"You are an AI assistant analyzing the following Icelandic court case:\n\n{st.session_state.case_memory}"},
+        {"role": "user", "content": follow_up}
     ]
-    
-    # Add conversation history
-    for message in st.session_state.conversation_history:
-        messages.append(message)
-    
-    # Add the new follow-up question
-    messages.append({"role": "user", "content": follow_up})
 
     response = client.chat.completions.create(
         model="gpt-4o-2024-08-06",
@@ -152,7 +145,7 @@ if uploaded_files is not None:
             if st.button("Greina mál"):
                 with st.spinner("Greini málið..."):
                     gpt_response = query_gpt_4(case_text, api_key)
-                    st.session_state.memory = f"AI Analysis:\n{gpt_response}"
+                    st.session_state.case_memory = case_text  # Store the case text in memory
                 st.subheader("Greining málsins")
                 st.markdown(gpt_response)
 
@@ -167,7 +160,7 @@ if uploaded_files is not None:
                 )
 
             # Step 2: Follow-up Questions
-            if 'memory' in st.session_state:
+            if st.session_state.case_memory:
                 st.markdown("---")
                 st.subheader("Spurðu út í dóminn")
                 follow_up = st.text_input("Settu inn spurningu þína hér:", key="follow_up")
@@ -175,12 +168,11 @@ if uploaded_files is not None:
                 if st.button("Svara"):
                     if follow_up:
                         with st.spinner("Svarar..."):
-                            follow_up_response = query_gpt_with_memory(case_text, follow_up, api_key)
-                            # Update conversation history
-                            st.session_state.conversation_history.append({"role": "user", "content": follow_up})
-                            st.session_state.conversation_history.append({"role": "assistant", "content": follow_up_response})
+                            follow_up_response = query_gpt_with_memory(st.session_state.case_memory, follow_up, api_key)
                         st.markdown("**Svar:**")
                         st.markdown(follow_up_response)
+                        # Clear the follow-up input after answering
+                        st.session_state.follow_up = ""
                     else:
                         st.warning("Vinsamlegast sláðu inn spurningu.")
 
