@@ -1,4 +1,4 @@
-# Dómagreining  alpha útgáfa 1.0
+# Dómagreining  alpha útgáfa 1.1
 
 **Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is)
 
