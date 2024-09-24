@@ -136,7 +136,6 @@ def query_gpt_with_memory(case_text, follow_up, api_key):
 
 if uploaded_files is not None:
     for uploaded_file in uploaded_files:
-        # Extract text from the uploaded file
         try:
             case_text = extract_text_from_file(uploaded_file)
 
@@ -145,19 +144,25 @@ if uploaded_files is not None:
             st.text(case_text[:1000] + "...") # Show first 1000 characters
 
             # Step 1: Analyze the case
+            if 'gpt_response' not in st.session_state:
+                st.session_state.gpt_response = None
+
             if st.button("Greina mál"):
                 with st.spinner("Greini málið..."):
-                    gpt_response = query_gpt_4(case_text, api_key)
+                    st.session_state.gpt_response = query_gpt_4(case_text, api_key)
                     st.session_state.case_memory = case_text  # Store the case text in memory
+
+            # Display the analysis if it exists
+            if st.session_state.gpt_response:
                 st.subheader("Greining málsins")
-                st.markdown(gpt_response)
+                st.markdown(st.session_state.gpt_response)
 
                 # Add download button for full analysis
                 original_filename = uploaded_file.name
                 new_filename = os.path.splitext(original_filename)[0] + "_reifun.txt"
                 st.download_button(
                     label="Hlaða niður fullri greiningu",
-                    data=gpt_response,
+                    data=st.session_state.gpt_response,
                     file_name=new_filename,
                     mime="text/plain"
                 )
@@ -166,7 +171,10 @@ if uploaded_files is not None:
             if st.session_state.case_memory:
                 st.markdown("---")
                 st.subheader("Spurðu út í dóminn")
-                follow_up = st.text_input("Settu inn spurningu þína hér:", key="follow_up")
+                
+                # Create a placeholder for the text input
+                follow_up_placeholder = st.empty()
+                follow_up = follow_up_placeholder.text_input("Settu inn spurningu þína hér:", key="follow_up")
 
                 if st.button("Svara"):
                     if follow_up:
@@ -175,11 +183,10 @@ if uploaded_files is not None:
                         st.markdown("**Svar:**")
                         st.markdown(follow_up_response)
                         # Clear the follow-up input after answering
-                        st.session_state.follow_up = ""
+                        follow_up_placeholder.empty()
                     else:
                         st.warning("Vinsamlegast sláðu inn spurningu.")
 
-             
         except ValueError as e:
             st.error(f"Villa: {str(e)}")
 
