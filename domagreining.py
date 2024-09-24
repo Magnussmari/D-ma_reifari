@@ -61,7 +61,7 @@ with col1:
 with col2:
     st.title("Dómagreining - Alpha útgáfa 1.0")
     st.caption("Þróunarverkefni")
-    st.markdown("**Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is)")
+    st.markdown("**Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is) | [Útskýring á YouTube](https://youtu.be/fyHEnoBW10w)")
     st.markdown("**Sækja API lykil:**")
     st.markdown("Til að nota þessa síðu þarft þú að sækja API lykil frá [OpenAI](https://platform.openai.com/api-keys).")
     st.markdown("Hver greining kostar nokkur cent þannig að þú þarft að virkja API áskrift til að nota þessa síðu.")
