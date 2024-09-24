@@ -11,9 +11,9 @@ Dómagreining er opinn hugbúnaður sem gerir notendum kleift að hlaða upp PDF
 - Tekur við PDF og TXT skjölum
 - Textaútdráttur úr PDF skjölum
 - Greining dóma með GPT-4o (krefst OpenAI API lykils)
-- Skipulögð svörun með 8 lykilþáttum
 - Hægt er að hlaða niður greiningunni
 
+1.1 - Hægt að spyrja út í skjalið eftir greiningu.
 ## Þróun
 
 -Fjölga mögulegum módelum
