@@ -4,7 +4,7 @@
 
 ## Um verkefnið
 
-Dómagreining er opinn hugbúnaður sem gerir notendum kleift að hlaða upp PDF eða TXT skjölum af íslenskum dómum og greina þá með hjálp GPT-4. Forritið dregur út lykilupplýsingar úr dómnum og skilar skipulagðri greiningu.
+Dómagreining er opinn hugbúnaður sem gerir notendum kleift að hlaða upp PDF eða TXT skjölum af íslenskum dómum og greina þá með hjálp GPT-4 gpt-4o-2024-08-06. Forritið dregur út lykilupplýsingar úr dómnum og skilar skipulagðri greiningu.
 
 ## Eiginleikar
 
