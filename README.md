@@ -1,4 +1,5 @@
 # Dómagreining  alpha útgáfa 1.1
+https://domagreining.streamlit.app/
 
 **Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is)
 
