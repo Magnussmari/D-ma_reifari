@@ -13,10 +13,6 @@ load_dotenv()
 if 'memory' not in st.session_state:
     st.session_state.memory = ""
 
-# Initialize session state for conversation history
-if 'conversation_history' not in st.session_state:
-    st.session_state.conversation_history = []
-
 # --- Styling ---
 st.markdown(
     """
@@ -62,7 +58,7 @@ with col2:
     st.title("Dómagreining - Alpha útgáfa 1.0")
     st.caption("Þróunarverkefni")
     st.markdown("**Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is)")
-    st.write("Hlaðið upp PDF eða TXT skjali af íslenskum dómi og greinið með GPT-4")
+    st.write("Hlaðið upp PDF eða TXT skjali af íslenskum dómi og greinið með GPT-4o")
     st.markdown("**Öll notkun á síðunni er undir MIT leyfi. Sjá nánari upplýsingar neðst á síðunni. Engum gögnum er safnað.**")
     st.markdown("Verkefnishlekkur og viðbótar upplýsingar: [https://github.com/Magnussmari/Domagreining/](https://github.com/Magnussmari/Domagreining/)")
 
@@ -71,7 +67,7 @@ api_key = st.text_input("Sláðu inn OpenAI API lykilinn þinn:", type="password
 #api_key = os.getenv("OPENAI_API_KEY") þá getur þú keyrt þetta locally með því að setja OPENAI_API_KEY= í .env	
 
 # --- File Uploader ---
-uploaded_files = st.file_uploader("Veljið dómsskjal...", type=["pdf", "txt"], accept_multiple_files=True)
+uploaded_file = st.file_uploader("Veljið dómsskjal...", type=["pdf", "txt"])
 
 def extract_text_from_file(file):
     if file.type == "application/pdf":
@@ -95,7 +91,7 @@ def query_gpt_4(case_text, api_key):
 
     {case_text}
 
-    Vinsamlegast gefðu skipulagt vel uppsett svar með eftirfarandi köflum, hafðu það nægilega langt þannig að einstaklingur átti sig vel á lögfræðilegum álitamálum:
+    Vinsamlegast gefðu skipulagða svörun með eftirfarandi köflum:
     Titill: Dómstóll - Númer málsins
     1. Samantekt málsins
     2. Lykilstaðreyndir
@@ -118,75 +114,77 @@ def query_gpt_4(case_text, api_key):
 
 def query_gpt_with_memory(case_text, follow_up, api_key):
     client = openai.OpenAI(api_key=api_key)
-    
-    messages = [
-        {"role": "system", "content": f"You are an AI assistant analyzing the following Icelandic court case:\n\n{case_text}"},
-        {"role": "assistant", "content": st.session_state.memory}
-    ]
-    
-    # Add conversation history
-    for message in st.session_state.conversation_history:
-        messages.append(message)
-    
-    # Add the new follow-up question
-    messages.append({"role": "user", "content": follow_up})
+    prompt = f"""
+    Greindu eftirfarandi íslenskan dóm og dragðu út lykilupplýsingar:
+
+    {case_text}
+
+    {st.session_state.memory}
+
+    Notandi lagði fram eftirspurn til að spyrja: {follow_up}
+
+    Vinsamlegast svaraðu spurningunni með að nota upplýsingar úr dómagreiningunni.
+    """
 
     response = client.chat.completions.create(
         model="gpt-4o-2024-08-06",
-        messages=messages
+        messages=[{"role": "user", "content": prompt}]
     )
 
     return response.choices[0].message.content.strip()
 
-if uploaded_files is not None:
-    for uploaded_file in uploaded_files:
-        # Extract text from the uploaded file
-        try:
-            case_text = extract_text_from_file(uploaded_file)
+if uploaded_file is not None and api_key:
+    # Extract text from the uploaded file
+    try:
+        case_text = extract_text_from_file(uploaded_file)
 
-            # Show raw extracted text (for debugging)
-            st.subheader("Útdreginn texti")
-            st.text(case_text[:1000] + "...") # Show first 1000 characters
+        # Show raw extracted text (for debugging)
+        st.subheader("Útdreginn texti")
+        st.text(case_text[:1000] + "...") # Show first 1000 characters
 
-            # Step 1: Analyze the case
-            if st.button("Greina mál"):
-                with st.spinner("Greini málið..."):
-                    gpt_response = query_gpt_4(case_text, api_key)
-                    st.session_state.memory = f"AI Analysis:\n{gpt_response}"
-                st.subheader("Greining málsins")
-                st.markdown(gpt_response)
+        # Button to analyze the case with GPT-4
+        if st.button("Greina mál"):
+            with st.spinner("Greini málið..."):
+                gpt_response = query_gpt_4(case_text, api_key)
+                # Initialize memory with the analysis
+                st.session_state.memory = f"AI Analysis:\n{gpt_response}"
+            st.subheader("Greining málsins")
+            st.markdown(gpt_response)
 
-                # Add download button for full analysis
-                original_filename = uploaded_file.name
-                new_filename = os.path.splitext(original_filename)[0] + "_reifun.txt"
-                st.download_button(
-                    label="Hlaða niður fullri greiningu",
-                    data=gpt_response,
-                    file_name=new_filename,
-                    mime="text/plain"
-                )
+        # Ensure the first response remains displayed
+        if st.session_state.memory:
+            st.subheader("Greining málsins")
+            st.markdown(st.session_state.memory)
 
-            # Step 2: Follow-up Questions
-            if 'memory' in st.session_state:
-                st.markdown("---")
-                st.subheader("Spurðu út í dóminn")
-                follow_up = st.text_input("Settu inn spurningu þína hér:", key="follow_up")
+        # Add download button for full analysis
+        if 'gpt_response' in locals():
+            original_filename = uploaded_file.name
+            new_filename = os.path.splitext(original_filename)[0] + "_reifun.txt"
+            st.download_button(
+                label="Hlaða niður fullri greiningu",
+                data=gpt_response,
+                file_name=new_filename,
+                mime="text/plain"
+            )
 
-                if st.button("Svara"):
-                    if follow_up:
-                        with st.spinner("Svarar..."):
-                            follow_up_response = query_gpt_with_memory(case_text, follow_up, api_key)
-                            # Update conversation history
-                            st.session_state.conversation_history.append({"role": "user", "content": follow_up})
-                            st.session_state.conversation_history.append({"role": "assistant", "content": follow_up_response})
-                        st.markdown("**Svar:**")
-                        st.markdown(follow_up_response)
-                    else:
-                        st.warning("Vinsamlegast sláðu inn spurningu.")
+        # --- Follow-up Questions ---
+        st.markdown("---")
+        st.subheader("Fylgispurningar")
+        follow_up = st.text_input("Settu inn spurningu þína hér:", key="follow_up")
 
-             
-        except ValueError as e:
-            st.error(f"Villa: {str(e)}")
+        if st.button("Svara"):
+            if follow_up:
+                with st.spinner("Svarar..."):
+                    follow_up_response = query_gpt_with_memory(case_text, follow_up, api_key)
+                    # Update memory with the follow-up conversation
+                    st.session_state.memory += f"\n\nUser: {follow_up}\nAI: {follow_up_response}"
+                st.markdown("**Svar:**")
+                st.markdown(follow_up_response)
+            else:
+                st.warning("Vinsamlegast sláðu inn spurningu.")
+
+    except ValueError as e:
+        st.error(f"Villa: {str(e)}")
 
 # --- Footer ---
 st.markdown(
