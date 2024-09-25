@@ -64,7 +64,7 @@ with col2:
     st.markdown("**Eftir Magnús Smára** | [www.smarason.is](https://www.smarason.is) | [Útskýring á YouTube](https://youtu.be/fyHEnoBW10w)")
     st.markdown("**Sækja API lykil:**")
     st.markdown("Til að nota þessa síðu þarft þú að sækja API lykil frá [OpenAI](https://platform.openai.com/api-keys).")
-    st.markdown("Hver greining kostar nokkur cent þannig að þú þarft að virkja API áskrift til að nota þessa síðu.")
+    st.markdown("OpenAI rukka nokkur cent fyrir hvertja greiningu þannig að þú þarft að virkja API áskrift til að nota þessa síðu.")
     st.write("Hlaðið upp PDF eða TXT skjali af íslenskum dómi og greinið með GPT-4")
     st.markdown("**Öll notkun á síðunni er undir MIT leyfi. Sjá nánari upplýsingar neðst á síðunni. Engum gögnum er safnað.**")
     st.markdown("Verkefnishlekkur og viðbótar upplýsingar: [https://github.com/Magnussmari/Domagreining/](https://github.com/Magnussmari/Domagreining/)")
