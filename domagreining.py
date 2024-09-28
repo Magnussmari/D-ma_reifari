@@ -180,6 +180,9 @@ if uploaded_files is not None:
                 if st.button("Svara"):
                     if follow_up:
                         with st.spinner("Svarar..."):
+                            # Use query_gpt_with_memory for follow-up questions
+                            # This function uses only the original case text and analysis as context
+                            # and does not accumulate previous follow-up Q&As
                             follow_up_response = query_gpt_with_memory(st.session_state.case_memory, follow_up, api_key)
                         
                         # Display new answer at the top using the placeholder
