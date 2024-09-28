@@ -56,7 +56,6 @@ st.markdown(
 # --- Header ---
 col1, col2 = st.columns([1, 3])
 with col1:
-    # Placeholder for your logo (replace with actual image URL later)
     st.image("header.png", width=150) 
 with col2:
     st.title("Dómagreining - Alpha útgáfa 1.1")
